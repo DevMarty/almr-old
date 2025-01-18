@@ -1,7 +1,22 @@
 import { dialog } from 'electron'
 import path from 'path'
 import fs from 'fs'
+import Database from 'better-sqlite3'
 import { getDatabasePath } from '@main/helpers'
+import { migrationList } from './migrations'
+
+let db: InstanceType<typeof Database>
+
+export const getDatabaseInstance = (): InstanceType<typeof Database> => {
+  if (!db) {
+    const dbPath = getDatabasePath()
+
+    db = new Database(dbPath)
+
+    console.log('Database instance created:', dbPath)
+  }
+  return db
+}
 
 export const initializeDatabase = async (): Promise<void> => {
   const dbPath = getDatabasePath()
@@ -46,4 +61,43 @@ export const initializeDatabase = async (): Promise<void> => {
   } else {
     console.log('Using existing database:', dbPath)
   }
+
+  await runMigrations()
+}
+
+const runMigrations = async (): Promise<void> => {
+  console.log('Checking migrations...')
+
+  if (!migrationList || migrationList.length === 0) {
+    console.log('No migrations found. Skipping migration process.')
+    return
+  }
+
+  const db = getDatabaseInstance()
+
+  console.log('Running migrations...')
+
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS migrations (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL UNIQUE,
+      applied_at DATETIME NOT NULL
+    );
+  `)
+
+  const appliedMigrations = (
+    db.prepare('SELECT name FROM migrations').all() as { name: string }[]
+  ).map((row) => row.name)
+
+  for (const { name, migration } of migrationList) {
+    if (!appliedMigrations.includes(name)) {
+      console.log(`Applying migration: ${name}`)
+      db.transaction(() => {
+        migration(db)
+        db.prepare('INSERT INTO migrations (name, applied_at) VALUES (?, ?)').run(name, Date.now())
+      })()
+    }
+  }
+
+  console.log('Migrations completed.')
 }
