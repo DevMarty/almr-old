@@ -1,0 +1,9 @@
+@use 'reset';
+@use 'fonts';
+@use 'variables';
+
+html {
+  background-color: var(--bg-color);
+  color: var(--font-base-color);
+  font: var(--font);
+}
