@@ -1,0 +1,30 @@
+.titleBar {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 137px;
+  width: 100%;
+  height: var(--titlebar-height);
+  border-bottom: 1px solid var(--stroke-color);
+  background-color: var(--bg-accent-color);
+  user-select: none;
+  -webkit-app-region: drag;
+}
+
+.leftBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  -webkit-app-region: no-drag;
+}
+
+.rightBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  -webkit-app-region: no-drag;
+}

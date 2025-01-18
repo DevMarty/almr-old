@@ -1,0 +1,30 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  color: var(--font-base-color);
+  font: var(--font);
+}
+
+.titleBar {
+  width: 100%;
+  height: var(--titlebar-height);
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: calc(100vh - var(--titlebar-height));
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--titlebar-height));
+}
+
+.page {
+  flex: 1;
+}
