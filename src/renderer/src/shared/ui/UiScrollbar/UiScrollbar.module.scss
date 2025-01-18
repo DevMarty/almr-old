@@ -1,0 +1,18 @@
+.scrollbarBox {
+  width: 100%;
+  height: 100%;
+}
+
+.scrollbar {
+  box-sizing: border-box !important;
+
+  --os-size: 18px !important;
+  --os-padding-perpendicular: 5px !important;
+  --os-padding-axis: 2px !important;
+  --os-track-border-radius: 0px !important;
+  --os-handle-interactive-area-offset: 4px !important;
+  --os-handle-border-radius: 0px !important;
+  --os-handle-bg: rgb(255 255 255 / 10%) !important;
+  --os-handle-bg-hover: rgb(255 255 255 / 20%) !important;
+  --os-handle-bg-active: rgb(255 255 255 / 20%) !important;
+}
