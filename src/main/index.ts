@@ -1,6 +1,7 @@
 import { app, shell, BrowserWindow } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import { initializeDatabase } from '@main/database'
 import icon from '../../resources/icon.png?asset'
 
 function createWindow(): void {
@@ -46,7 +47,7 @@ function createWindow(): void {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
 
@@ -57,7 +58,14 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  createWindow()
+  try {
+    await initializeDatabase()
+
+    createWindow()
+  } catch (error) {
+    console.error('Error during database initialization:', error)
+    app.exit()
+  }
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
