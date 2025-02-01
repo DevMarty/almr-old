@@ -2,6 +2,7 @@ import { app, shell, BrowserWindow } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { initializeDatabase } from '@main/database'
+import { registerIpcHandlers } from '@main/ipcHandlers'
 import icon from '../../resources/icon.png?asset'
 
 function createWindow(): void {
@@ -61,6 +62,7 @@ app.whenReady().then(async () => {
   try {
     await initializeDatabase()
 
+    registerIpcHandlers()
     createWindow()
   } catch (error) {
     console.error('Error during database initialization:', error)
