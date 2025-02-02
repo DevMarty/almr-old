@@ -1,8 +1,16 @@
 import { useEffect } from 'react'
 import { useSettingsStore } from '@renderer/entities/settings'
+import { setTitleBarColors } from '@renderer/shared/api/app'
+import { addTransparencyToHex } from '@renderer/shared/lib/colors'
 
 const updateThemeMode = (newTheme: 'light' | 'dark'): void => {
   document.documentElement.setAttribute('data-theme', newTheme)
+
+  const computedStyle = getComputedStyle(document.documentElement)
+  const bgColor = computedStyle.getPropertyValue('--bg-color').trim()
+  const fontColor = computedStyle.getPropertyValue('--font-base-color').trim()
+
+  setTitleBarColors(addTransparencyToHex(bgColor, 0), addTransparencyToHex(fontColor, 1))
 }
 
 const handleSystemTheme = (): (() => void) => {

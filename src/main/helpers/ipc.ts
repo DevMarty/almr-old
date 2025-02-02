@@ -11,3 +11,10 @@ export const ipcMainHandle = <K extends keyof IpcHandlers>(
     return handler(...args)
   })
 }
+
+export const ipcMainOn = <K extends keyof IpcHandlers>(
+  channel: K,
+  listener: (event: Electron.IpcMainEvent, ...args: Parameters<IpcHandlers[K]>) => void
+): void => {
+  ipcMain.on(channel, listener)
+}

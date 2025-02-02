@@ -7,3 +7,10 @@ export const ipcRendererInvoke = <K extends keyof IpcHandlers>(
 ): Promise<Awaited<ReturnType<IpcHandlers[K]>>> => {
   return ipcRenderer.invoke(channel, ...args)
 }
+
+export const ipcRendererSend = <K extends keyof IpcHandlers>(
+  channel: K,
+  ...args: Parameters<IpcHandlers[K]>
+): void => {
+  ipcRenderer.send(channel, ...args)
+}
