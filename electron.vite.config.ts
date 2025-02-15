@@ -25,11 +25,19 @@ export default defineConfig({
   renderer: {
     resolve: {
       alias: {
-        '@renderer': resolve('src/renderer/src'),
+        '@main-ui': resolve('src/renderer/main/src'),
         '@shared': resolve('src/shared')
       }
     },
     plugins: [react()],
+    build: {
+      rollupOptions: {
+        input: {
+          main: resolve('src/renderer/main/index.html'),
+          splash: resolve('src/renderer/splash/index.html')
+        }
+      }
+    },
     css: {
       preprocessorOptions: {
         scss: {

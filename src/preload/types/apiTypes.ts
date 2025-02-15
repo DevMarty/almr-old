@@ -1,6 +1,7 @@
 import { IpcHandlers } from './ipcTypes'
 
 export type appAPIType = {
+  showMainWindow: IpcHandlers['app:showMainWindow']
   setTitleBarColors: IpcHandlers['app:setTitleBarColors']
 }
 

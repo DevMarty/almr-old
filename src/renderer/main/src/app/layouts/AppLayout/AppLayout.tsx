@@ -1,9 +1,9 @@
 import React, { memo } from 'react'
-import { UiTitleBar } from '@renderer/shared/ui/UiTitleBar'
-import { UiSidebar } from '@renderer/shared/ui/UiSidebar'
-import { UiPage } from '@renderer/shared/ui/UiPage'
-import { UiLogo } from '@renderer/shared/ui/UiLogo'
-import { ThemeModeSelector } from '@renderer/features/settings'
+import { UiTitleBar } from '@main-ui/shared/ui/UiTitleBar'
+import { UiSidebar } from '@main-ui/shared/ui/UiSidebar'
+import { UiPage } from '@main-ui/shared/ui/UiPage'
+import { UiLogo } from '@main-ui/shared/ui/UiLogo'
+import { ThemeModeSelector } from '@main-ui/features/settings'
 import cls from './AppLayout.module.scss'
 
 export const AppLayout = memo((): React.JSX.Element => {

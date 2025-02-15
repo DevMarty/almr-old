@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import { useSettingsStore } from '@renderer/entities/settings'
-import { setTitleBarColors } from '@renderer/shared/api/app'
-import { addTransparencyToHex } from '@renderer/shared/lib/colors'
+import { useSettingsStore } from '@main-ui/entities/settings'
+import { setTitleBarColors } from '@main-ui/shared/api/app'
+import { addTransparencyToHex } from '@main-ui/shared/lib/colors'
 
 const updateThemeMode = (newTheme: 'light' | 'dark'): void => {
   document.documentElement.setAttribute('data-theme', newTheme)

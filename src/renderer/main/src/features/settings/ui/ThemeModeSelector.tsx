@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSettingsStore } from '@renderer/entities/settings'
+import { useSettingsStore } from '@main-ui/entities/settings'
 import { SettingsSchema } from '@shared/schemas'
 
 const themeModes = (

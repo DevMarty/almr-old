@@ -1,8 +1,8 @@
 import { app, BrowserWindow } from 'electron'
 import { electronApp, optimizer } from '@electron-toolkit/utils'
-import { initializeDatabase } from '@main/database'
+import { createMainWindow, createSplashWindow } from '@main/windows'
 import { registerIpcHandlers } from '@main/ipcHandlers'
-import { createMainWindow } from '@main/windows'
+import { initializeDatabase } from '@main/database'
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -18,15 +18,12 @@ app.whenReady().then(async () => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  try {
-    await initializeDatabase()
-
-    registerIpcHandlers()
-    createMainWindow()
-  } catch (error) {
-    console.error('Error during database initialization:', error)
-    app.exit()
-  }
+  createSplashWindow().on('ready-to-show', async () => {
+    initializeDatabase().then(() => {
+      registerIpcHandlers()
+      createMainWindow()
+    })
+  })
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the

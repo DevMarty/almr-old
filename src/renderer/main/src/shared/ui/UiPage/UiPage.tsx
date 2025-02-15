@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import clsx from 'clsx'
-import { UiScrollbar } from '@renderer/shared/ui/UiScrollbar'
+import { UiScrollbar } from '@main-ui/shared/ui/UiScrollbar'
 import cls from './UiPage.module.scss'
 
 interface UiPageProps {
