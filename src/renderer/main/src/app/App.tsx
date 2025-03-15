@@ -1,16 +1,12 @@
 import React from 'react'
+import { RouterProvider } from 'react-router'
 import { useThemeMode } from '@main-ui/features/settings'
-import { AppLoader } from './loaders/AppLoader'
-import { AppLayout } from './layouts/AppLayout'
+import { router } from '@main-ui/app/router'
 
 function App(): React.JSX.Element {
   useThemeMode()
 
-  return (
-    <AppLoader>
-      <AppLayout />
-    </AppLoader>
-  )
+  return <RouterProvider router={router} />
 }
 
 export default App

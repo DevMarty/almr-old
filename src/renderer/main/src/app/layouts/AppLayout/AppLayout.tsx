@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import { Outlet } from 'react-router'
 import { UiTitleBar } from '@main-ui/shared/ui/UiTitleBar'
 import { UiSidebar } from '@main-ui/shared/ui/UiSidebar'
 import { UiPage } from '@main-ui/shared/ui/UiPage'
@@ -12,7 +13,9 @@ export const AppLayout = memo((): React.JSX.Element => {
       <UiTitleBar className={cls.titleBar} leftBox={<UiLogo />} rightBox={<ThemeModeSelector />} />
       <div className={cls.main}>
         <UiSidebar className={cls.sidebar} />
-        <UiPage className={cls.page}>ALMR</UiPage>
+        <UiPage className={cls.page}>
+          <Outlet />
+        </UiPage>
       </div>
     </div>
   )
